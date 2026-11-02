@@ -1,0 +1,26 @@
+Model: distilgpt2
+GPU: NVIDIA Tesla T4
+Precision: FP16
+
+Validated Batch Benchmark
+3 warm-up runs
+5 timed runs per configuration
+
+Batch size: 1
+Average time: 0.3039 seconds
+Total tokens: 30
+Tokens/second: 98.73
+
+Batch size: 4
+Average time: 0.2603 seconds
+Total tokens: 120
+Tokens/second: 461.00
+
+Batch size: 8
+Average time: 0.3308 seconds
+Total tokens: 240
+Tokens/second: 725.59
+
+Finding:
+Increasing batch size significantly improved total throughput.
+Batch size 8 achieved the highest throughput in this experiment.

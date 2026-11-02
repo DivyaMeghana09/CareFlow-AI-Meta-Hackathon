@@ -1,0 +1,20 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Secrets
+.env
+
+# Generated care data
+care_memory.json
+care_tasks.json
+human_attention.json
+
+# Images
+# Keep screenshots and daily_rings.png tracked
+
+# VS Code
+.vscode/

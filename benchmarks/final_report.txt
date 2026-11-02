@@ -1,0 +1,41 @@
+========================================
+CUDA BLOCK SIZE OPTIMIZATION
+========================================
+
+Operation:
+Vector Addition
+
+Elements:
+10,000,000
+
+Threads per Block Tested:
+
+128:
+0.00061117 seconds
+
+256:
+0.00058153 seconds
+
+512:
+0.00059874 seconds
+
+BEST CONFIGURATION
+----------------------------------------
+
+256 Threads per Block
+
+Average GPU Kernel Time:
+0.00058153 seconds
+
+CONCLUSION
+----------------------------------------
+
+For this vector-addition kernel and
+10-million-element workload on the
+NVIDIA Tesla T4, 256 threads per block
+produced the lowest average measured
+kernel execution time.
+
+The performance differences were small,
+so the result is specific to this kernel
+and workload.
