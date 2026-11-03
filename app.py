@@ -12,6 +12,7 @@ from tasks import create_task, get_tasks
 from family_summary import generate_family_summary
 from human_attention import flag_human_attention, get_alerts
 from tavily import TavilyClient
+from meta_ai import generate_care_response
 
 st.set_page_config(
     page_title="CareFlow AI — Elder Care Companion",
@@ -128,6 +129,7 @@ def search_web(query):
 def run_update_timeline(observation, mood=""):
     return update_timeline(observation, mood)
 
+
 def analyze_caregiver_message(message, context=""):
     response = client.chat.completions.create(
         model="nvidia/nemotron-3-super-120b-a12b",
@@ -135,18 +137,44 @@ def analyze_caregiver_message(message, context=""):
             {
                 "role": "system",
                 "content": (
-                    "You are CareFlow AI, an elderly-care assistant. "
-                    "Do not diagnose medical conditions, prescribe treatment, or give detailed medical instructions. "
-                    "Focus on observations, caregiver follow-up, and when human attention may be needed. "
-                    "Keep the mood very short: use one or two simple words such as "
-                    "happy, sad, tired, calm, concerned, lonely, okay, or neutral. "
-                    "Do not give explanations inside the mood field. "
-                    "Use the additional context when relevant. "
-                    "Return ONLY valid JSON. "
-                    "Do not use markdown. "
-                    "Do not include extra text. "
-                    "The JSON must contain exactly these four keys: "
-                    "observation, mood, follow_up, action."
+                    "You are CareFlow AI, a non-clinical elder-care "
+                    "coordination assistant.\n\n"
+
+                    "YOUR PURPOSE:\n"
+                    "- Organize everyday observations about older adults.\n"
+                    "- Identify emotional and daily wellbeing patterns.\n"
+                    "- Help caregivers coordinate appropriate follow-ups.\n"
+                    "- Encourage social connection and everyday activities.\n\n"
+
+                    "STRICT SAFETY RULES:\n"
+                    "- Never diagnose diseases or medical conditions.\n"
+                    "- Never prescribe medicines, treatments, diets, or exercises.\n"
+                    "- Never recommend specific medical interventions.\n"
+                    "- Never interpret observations as a medical diagnosis.\n"
+                    "- For urgent concerns, tell the caregiver to seek "
+                    "immediate assistance from appropriate emergency services "
+                    "or a qualified professional.\n"
+                    "- For other health-related concerns, recommend that "
+                    "the caregiver contact a qualified healthcare professional.\n"
+                    "- Do not minimize or dismiss concerning observations.\n\n"
+
+                    "RESPONSE RULES:\n"
+                    "- observation: Briefly restate what was reported.\n"
+                    "- mood: Use one simple word such as happy, sad, tired, "
+                    "calm, concerned, lonely, okay, or neutral.\n"
+                    "- follow_up: Suggest a non-medical caregiver check-in "
+                    "or a suitable human follow-up.\n"
+                    "- action: Give a practical coordination action, "
+                    "such as recording the observation or notifying a caregiver.\n"
+                    "- Do not invent people, symptoms, events, or details.\n"
+                    "- Clearly distinguish reported facts from suggestions.\n"
+                    "- Use warm, respectful, simple language.\n\n"
+
+                    "OUTPUT FORMAT:\n"
+                    "Return ONLY valid JSON with exactly four keys: "
+                    "observation, mood, follow_up, action. "
+                    "All four values must be strings. "
+                    "Do not include Markdown or additional text."
                 )
             },
             {
@@ -161,13 +189,27 @@ def analyze_caregiver_message(message, context=""):
         max_tokens=500
     )
 
-    text = response.choices[0].message.content.strip()
+    text = response.choices[0].message.content
 
-    # Remove markdown code fences if the model adds them
+    if not text:
+        raise ValueError("The AI returned an empty response.")
+
+    text = text.strip()
+
     if text.startswith("```"):
         text = text.replace("```json", "").replace("```", "").strip()
 
-    return json.loads(text)
+    result = json.loads(text)
+
+    required_keys = {
+        "observation", "mood", "follow_up", "action"
+    }
+
+    if set(result.keys()) != required_keys:
+        raise ValueError("AI response does not contain the required JSON fields.")
+
+    return result
+
 
 
 # Store CareFlow results between Streamlit reruns
