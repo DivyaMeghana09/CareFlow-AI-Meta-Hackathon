@@ -51,7 +51,7 @@ These improvements aim to make family communication clearer and help caregivers 
 
 The following diagram illustrates how CareFlow AI processes caregiver observations and coordinates its memory, task, human-attention, and family-summary capabilities.
 
-![CareFlow AI System Architecture](careflow-system-architecture.png)
+![CareFlow AI System Architecture](careflow-system-architecture.jpeg)
 
 ---
 
