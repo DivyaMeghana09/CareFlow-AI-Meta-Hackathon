@@ -35,6 +35,24 @@ Improved family summaries with:
 
 These improvements aim to make family communication clearer and help caregivers identify information requiring attention.
 
+## Development Timeline and Contributions
+
+CareFlow AI evolved from an earlier Elderly Mood Companion project.
+
+**Pre-existing foundation:**
+- Caregiver observation analysis.
+- Mood identification.
+- Memory management.
+- Task coordination.
+
+**Developed during the Meta Global AI Developer Hackathon:**
+- Human Attention Alerts with high-priority escalation.
+- Improved Family Summary with recent-observation filtering and duplicate removal.
+
+These contributions are explicitly distinguished from the existing project functionality.
+
+**Current limitation:** The application uses Nebius Nemotron. Meta Model API and Meta open-weight model integration have not been completed.
+
 ## AI Workflow
 
 Caregiver Message  
