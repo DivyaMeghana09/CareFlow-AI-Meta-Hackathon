@@ -1,112 +1,110 @@
-# Elderly Mood Companion
+# CareFlow AI — Elder Care Companion
 
-## CareFlow AI
+**An AI-powered elder-care coordination assistant designed to help families stay informed, organized, and connected.**
 
-Elderly Mood Companion is being upgraded into CareFlow AI,
-an AI-powered elderly-care workflow assistant.
+CareFlow AI builds on the Elderly Mood Companion project, evolving it into an everyday elder-care coordination application.
 
-## What CareFlow AI adds
+It helps caregivers organize observations, maintain care-related memories, coordinate tasks, and communicate important updates.
 
-- NVIDIA Nemotron LLM
-- Caregiver observation analysis
-- Mood identification
-- Follow-up suggestions
-- Caregiver actions
-- Memory of previous observations
-- Agent decision-making
+## Key Features
+
+- **Caregiver Observation Analysis:** Processes caregiver messages and generates structured observations and follow-up suggestions.
+- **Mood Identification:** Identifies conversational mood signals to support everyday interactions.
+- **Caregiver Memory:** Saves and retrieves previous care observations.
+- **Task Coordination:** Creates caregiver tasks based on identified needs.
+- **Human Attention Alerts:** Flags potentially urgent messages for human intervention.
+- **Family Summary:** Organizes recent observations, filters duplicate entries, and generates concise family updates.
+- **Everyday Wellbeing Check-ins:** Supports routine check-ins and activity suggestions.
+
+## Meta Hackathon Contributions
+
+The following improvements were developed during the Meta Global AI Developer Hackathon:
+
+### 1. Human Attention Alerts
+
+Introduced a human-attention escalation workflow that identifies potentially urgent caregiver messages and creates high-priority alerts for human review.
+
+Example: A simulated message indicating that an older adult has fallen and is unresponsive can trigger a high-priority alert.
+
+### 2. Improved Family Summary
+
+Improved family summaries with:
+- Latest-observation filtering.
+- Duplicate-entry filtering.
+- More concise summaries of recent care information.
+
+These improvements aim to make family communication clearer and help caregivers identify information requiring attention.
 
 ## AI Workflow
 
-Caregiver observation
-        ↓
-NVIDIA Nemotron
-        ↓
-Agent decision
-        ↓
-Memory / Analysis
-        ↓
-CareFlow response
+Caregiver Message  
+↓  
+Nebius Nemotron  
+↓  
+Structured Observation Analysis  
+↓  
+Agent Decision  
+↓  
+Memory / Task / Human Attention Alert  
+↓  
+CareFlow AI Response
 
-## Milestone 1
-- [x] NVIDIA Nemotron integration
-- [x] Structured AI analysis
+## Technology Stack
 
-## Milestone 2
-- [x] Memory storage
-- [x] Memory retrieval
-- [x] Agent decision-making
-- [x] Tool execution
+- Python
+- Streamlit
+- Nebius Nemotron
+- JSON-based local storage
+- Git and GitHub
 
-## Milestone 3 — External Tools + Agent Routing
+**AI provider disclosure:** The current implementation uses Nebius Nemotron for AI inference. Meta Model API and Meta open-weight model integration have not been completed.
 
-- [x] Integrated Tavily web search
-- [x] Agent can choose when web search is needed
-- [x] Agent can save caregiver observations
-- [x] Agent can retrieve previous observations
-- [x] Agent can use external web information
-- [x] Tested memory and web-search workflows
+## Running the Application
 
-### Agent Tools
+Clone the repository:
 
-CareFlow AI can choose between:
-
-- `save_memory` — store a new caregiver observation
-- `read_memory` — retrieve previous observations and patterns
-- `search_web` — retrieve external information using Tavily
-- `analyze_only` — analyze without using a tool
-
-## ✨ Features
-- Friendly mood conversation
-- 9 important daily habit questions
-- Beautiful wellness rings diagram
-- Saves result automatically as `daily_rings.png`
-- Helpful tips when answer is "No"
-- Available as desktop and web app
-
-## 🌐 Live Demo
-
-**[Try Live Web Version →](https://elderly-mood-companion.streamlit.app/)**  
-*(No installation needed - works in any browser)*
-
-## 📸 Screenshots
-
-**1. Program Running**  
-![Program Interface](screenshot-terminal.png)
-
-**2. Generated Wellness Rings**  
-![Daily Wellness Rings](daily_rings.png)
-
-*Example: 6 out of 9 healthy habits completed*
-
-## 🚀 How to Run
-
-### Desktop Version
 ```bash
-python main.py
+git clone https://github.com/DivyaMeghana09/CareFlow-AI-Meta-Hackathon.git
+cd CareFlow-AI-Meta-Hackathon
 ```
 
-### Web Version (Recommended)
+Create and activate a virtual environment, then install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the application:
+
 ```bash
 streamlit run app.py
 ```
 
-**📁 Project Structure**
-```bash
-elderly-mood-companion/
-├── main.py                    # Desktop version
-├── app.py                     # Web version (Streamlit)
-├── README.md                  # Project documentation
-├── requirements.txt           # Required packages
-├── daily_rings.png            # Example output image
-├── screenshot-terminal.png    # Screenshot of program running
-├── LICENSE                    # License file
-└── .gitignore                 # Files to ignore 
+## Project Structure
+
+```text
+CareFlow-AI-Meta-Hackathon/
+├── app.py
+├── main.py
+├── memory.py
+├── family_summary.py
+├── human_attention.py
+├── benchmarks/
+├── README.md
+├── requirements.txt
+└── LICENSE
 ```
 
-## 📄 License
-This project is licensed under the MIT License - see the LICENSE file.
+## Safety and Scope
 
-## 📊 Results
-Users get clear visual feedback through progress rings — green rings show completed healthy habits, encouraging consistent daily routines.
+CareFlow AI is designed for non-clinical elder-care coordination. It does not provide medical diagnoses, prescribe treatments, or replace professional care.
 
-Made with love for seniors 💕
+Potential emergencies require immediate human intervention and contact with local emergency services.
+
+## License
+
+MIT License.
+
+---
+
+**CareFlow AI — Making everyday elder-care coordination more organized, connected, and responsive.**
